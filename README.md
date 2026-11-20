@@ -65,7 +65,8 @@ Open http://localhost:5173. In development Vite forwards `/api/*` to `http://loc
 | GET/PUT | `/api/admin/profile` | admin | Read/update site content, hero, about, education, footer, social links |
 | GET | `/api/admin/messages` | admin | List messages (`?search=&read=&page=&limit=`) |
 | PATCH/DELETE | `/api/admin/messages/:id` | admin | Mark read/unread or delete message |
-| POST | `/api/admin/upload` | admin | Upload image (jpg/png/webp, max 5MB) to `/uploads` |
+| POST | `/api/admin/upload` | admin | Store image binary in MongoDB (jpg/png/webp, max 5MB) |
+| GET | `/api/images/:id` | public | Retrieve a MongoDB-stored image |
 | GET/POST/PUT/DELETE | `/api/admin/:resource` | admin | CRUD for `projects`, `expertise`, `skill-groups`, `gigs`, `fiverr-projects`, `experience`, `research-interests` |
 | PATCH | `/api/admin/:resource/reorder` | admin | Reorder items with `[{ id, order }]` |
 

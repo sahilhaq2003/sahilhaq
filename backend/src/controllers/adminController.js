@@ -4,6 +4,7 @@ import Message from "../models/Message.js";
 import Image from "../models/Image.js";
 import { Expertise, SkillGroup, Gig, FiverrProject, Profile, Experience, ResearchInterest, Certification } from "../models/Content.js";
 import { asyncHandler } from "../middleware/index.js";
+import { resolveImageUrl, resolveImageUrls } from "../utils/imageUrl.js";
 
 const ALLOWED_MIME = new Set(["image/jpeg", "image/png", "image/webp"]);
 
@@ -27,13 +28,16 @@ export const uploadImage = asyncHandler(async (req, res) => {
     contentType: req.file.mimetype,
     data: req.file.buffer,
   });
-  res.json({ url: `/api/images/${doc._id}` });
+  const path = `/api/images/${doc._id}`;
+  res.status(201).json({ id: doc._id, url: resolveImageUrl(req, path) });
 });
 
 export const getImage = asyncHandler(async (req, res) => {
-  const doc = await Image.findById(req.params.id);
+  const doc = await Image.findById(req.params.id).select("contentType data");
   if (!doc) return res.status(404).json({ error: "Image not found" });
   res.set("Content-Type", doc.contentType);
+  res.set("Content-Length", String(doc.data.length));
+  res.set("Cross-Origin-Resource-Policy", "cross-origin");
   res.set("Cache-Control", "public, max-age=31536000, immutable");
   res.send(doc.data);
 });
@@ -51,7 +55,7 @@ export const getStats = asyncHandler(async (req, res) => {
 
 export const getProfile = asyncHandler(async (req, res) => {
   const profile = await Profile.findOne({ key: "main" }).lean();
-  res.json(profile || {});
+  res.json(profile ? { ...profile, portrait: resolveImageUrl(req, profile.portrait) } : {});
 });
 
 export const updateProfile = asyncHandler(async (req, res) => {
@@ -110,6 +114,12 @@ function getModel(resource) {
 export const listResource = asyncHandler(async (req, res) => {
   const Model = getModel(req.params.resource);
   const items = await Model.find().sort({ order: 1, createdAt: 1 }).lean();
+  if (req.params.resource === "projects") {
+    return res.json(items.map((item) => ({
+      ...item,
+      screenshots: resolveImageUrls(req, item.screenshots),
+    })));
+  }
   res.json(items);
 });
 

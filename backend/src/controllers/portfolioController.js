@@ -1,11 +1,12 @@
 import Project from "../models/Project.js";
 import { Expertise, SkillGroup, Gig, FiverrProject, Profile, Experience, ResearchInterest, Certification } from "../models/Content.js";
 import { asyncHandler } from "../middleware/index.js";
+import { resolveImageUrl, resolveImageUrls } from "../utils/imageUrl.js";
 
 const byOrder = { order: 1, createdAt: 1 };
 
 /** Shapes a project document for the frontend (uses `id` = slug, like the original page). */
-export const toClientProject = (p) => ({
+export const toClientProject = (p, req) => ({
   id: p.slug,
   _id: p._id,
   cats: p.cats,
@@ -19,7 +20,7 @@ export const toClientProject = (p) => ({
   arch: p.arch,
   contrib: p.contrib,
   challenges: p.challenges || "",
-  screenshots: p.screenshots || [],
+  screenshots: resolveImageUrls(req, p.screenshots),
   tech: p.tech,
   github: p.github,
   demo: p.demo,
@@ -47,7 +48,7 @@ export const getPortfolio = asyncHandler(async (req, res) => {
       fiverr: profile?.fiverr || "",
       instagram: profile?.instagram || "",
       x: profile?.x || "",
-      portrait: profile?.portrait || "",
+      portrait: resolveImageUrl(req, profile?.portrait),
     },
     categories: profile?.categories?.length ? profile.categories : ["All Projects"],
     hero: profile?.hero || {},
@@ -64,7 +65,7 @@ export const getPortfolio = asyncHandler(async (req, res) => {
     })),
     expertise: expertise.map(({ icon, title, desc, tags }) => ({ icon, title, desc, tags })),
     skills: Object.fromEntries(skills.map((g) => [g.name, g.items])),
-    projects: projects.map(toClientProject),
+    projects: projects.map((project) => toClientProject(project, req)),
     gigs: gigs.map(({ icon, title, desc, tags }) => ({ icon, title, desc, tags })),
     fiverrProjects: fiverrProjects.map(({ title, desc, tech, year, url }) => ({ title, desc, tech, year, url })),
   });

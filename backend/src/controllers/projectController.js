@@ -13,14 +13,14 @@ export const listProjects = asyncHandler(async (req, res) => {
   const filter = { published: true };
   if (req.query.category && req.query.category !== "All Projects") filter.cats = req.query.category;
   const projects = await Project.find(filter).sort({ order: 1, createdAt: 1 }).lean();
-  res.json(projects.map(toClientProject));
+  res.json(projects.map((project) => toClientProject(project, req)));
 });
 
 /** GET /api/projects/:slug */
 export const getProject = asyncHandler(async (req, res) => {
   const p = await Project.findOne({ slug: req.params.slug, published: true }).lean();
   if (!p) return res.status(404).json({ error: "Project not found" });
-  res.json(toClientProject(p));
+  res.json(toClientProject(p, req));
 });
 
 /** POST /api/projects (admin) */
