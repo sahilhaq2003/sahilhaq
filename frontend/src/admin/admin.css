@@ -31,7 +31,112 @@
   border: 1px solid rgba(23, 20, 18, 0.08);
   border-radius: 1.75rem;
   padding: 2.5rem;
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.18);
+}
+
+.admin-login-split {
+  min-height: 100vh;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  background: #12100e;
+}
+
+.admin-login-showcase {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 4rem;
+  color: #f7f4ef;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(177, 95, 44, 0.25), transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(224, 159, 103, 0.16), transparent 45%),
+    #12100e;
+}
+
+.admin-login-orb {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  border: 1px dashed rgba(224, 159, 103, 0.22);
+  right: -120px;
+  top: -100px;
+  pointer-events: none;
+}
+
+.admin-pill-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #e09f67;
+  background: rgba(224, 159, 103, 0.12);
+  border: 1px solid rgba(224, 159, 103, 0.28);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  margin-bottom: 1.25rem;
+}
+
+.admin-showcase-title {
+  margin: 0 0 1rem;
+  font-size: 2.35rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  max-width: 18ch;
+}
+
+.admin-showcase-sub {
+  margin: 0 0 2.25rem;
+  color: rgba(247, 244, 239, 0.68);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 44ch;
+}
+
+.admin-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  max-width: 480px;
+}
+
+.admin-showcase-item {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 0.9rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.admin-showcase-item strong {
+  font-size: 0.88rem;
+  color: #f7f4ef;
+}
+
+.admin-showcase-item span {
+  font-size: 0.78rem;
+  color: rgba(247, 244, 239, 0.58);
+}
+
+.admin-login-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: #f5f2ed;
+}
+
+@media (max-width: 900px) {
+  .admin-login-split {
+    grid-template-columns: 1fr;
+  }
+  .admin-login-showcase {
+    display: none;
+  }
 }
 
 /* Sidebar */
