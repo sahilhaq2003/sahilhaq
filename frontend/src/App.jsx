@@ -6,6 +6,7 @@ import Hero from "./components/Hero.jsx";
 import About, { Marquee } from "./components/About.jsx";
 import { Expertise, Experience, Fiverr, Skills, Education, Research, Certifications } from "./components/Sections.jsx";
 import Projects from "./components/Projects.jsx";
+import AllProjectsPage from "./components/AllProjectsPage.jsx";
 import Contact from "./components/Contact.jsx";
 import LoginPage from "./admin/pages/LoginPage.jsx";
 import AdminLayout from "./admin/AdminLayout.jsx";
@@ -19,6 +20,7 @@ export default function App() {
       <Routes>
         <Route path="/admin/login" element={<LoginPage />} />
         <Route path="/admin/*" element={<AdminLayout />} />
+        <Route path="/all-projects" element={<AllProjectsPage />} />
         <Route path="/login" element={<Navigate to="/admin/login" replace />} />
         <Route path="*" element={<PortfolioHome />} />
       </Routes>

@@ -297,30 +297,48 @@
 .admin-field {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  margin-bottom: 1rem;
-  font-size: 0.85rem;
-  font-weight: 600;
+  gap: 0.45rem;
+  margin-bottom: 1.1rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #171412;
+}
+
+.admin-field > span {
+  color: #171412;
+}
+
+.admin-card h1,
+.admin-card h2,
+.admin-card h3,
+.admin-card h4,
+.admin-content > div > h1,
+.admin-content > form h1 {
+  color: #171412;
 }
 
 .admin-input,
 .admin-textarea,
 .admin-select {
   width: 100%;
-  padding: 0.7rem 0.95rem;
+  padding: 0.72rem 0.95rem;
   border-radius: 0.85rem;
-  border: 1px solid var(--line, rgba(23, 20, 18, 0.16));
-  background: var(--bg, #f7f4ef);
-  color: var(--ink, #171412);
+  border: 1px solid #ddd6cc;
+  background: #ffffff;
+  color: #171412;
   font-family: inherit;
   font-size: 0.92rem;
   font-weight: 400;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .admin-input:focus,
-.admin-textarea:focus {
-  outline: 2px solid var(--acc, #b15f2c);
-  border-color: transparent;
+.admin-textarea:focus,
+.admin-select:focus {
+  outline: none;
+  border-color: #b15f2c;
+  box-shadow: 0 0 0 3px rgba(177, 95, 44, 0.15);
 }
 
 /* Buttons */
@@ -416,11 +434,18 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1rem 1.25rem;
-  background: var(--surf, #fff);
-  border: 1px solid var(--line, rgba(23, 20, 18, 0.1));
+  padding: 1.05rem 1.3rem;
+  background: #ffffff;
+  border: 1px solid rgba(23, 20, 18, 0.08);
   border-radius: 1.25rem;
   margin-bottom: 0.75rem;
+  box-shadow: 0 4px 14px rgba(23, 20, 18, 0.025);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.admin-row:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(23, 20, 18, 0.055);
 }
 
 .admin-row.unread {

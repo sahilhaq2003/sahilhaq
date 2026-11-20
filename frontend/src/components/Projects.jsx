@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { SplitText, Tags } from "./ui.jsx";
 
 const Todo = ({ children }) => <p className="todo">{children}</p>;
@@ -9,7 +10,7 @@ const Sec = ({ title, children }) => (
   </>
 );
 
-function ProjectModal({ project: p, onClose }) {
+export function ProjectModal({ project: p, onClose }) {
   const closeRef = useRef(null);
 
   useEffect(() => {
@@ -123,7 +124,7 @@ export default function Projects({ projects, categories, github }) {
 
         <ul className="cards">
           {shown.length ? (
-            shown.map((p) => (
+            shown.slice(0, 4).map((p) => (
               <li key={p.id}>
                 <button className="card" onClick={() => setOpen(p)} style={{ position: "relative", overflow: "hidden" }}>
                   {p.screenshots?.[0] && (
@@ -169,11 +170,18 @@ export default function Projects({ projects, categories, github }) {
           )}
         </ul>
 
-        {github && (
-          <div style={{ textAlign: "center", marginTop: "2.5rem" }}>
-            <a className="pill dark" href={github} target="_blank" rel="noopener noreferrer">
-              Browse more projects on GitHub ↗
-            </a>
+        {(shown.length > 4 || github) && (
+          <div style={{ textAlign: "center", marginTop: "2.5rem", display: "flex", justifyContent: "center", gap: "1rem", flexWrap: "wrap" }}>
+            {shown.length > 4 && (
+              <Link className="pill dark" to="/all-projects" style={{ textDecoration: "none" }}>
+                See All Projects ({shown.length}) →
+              </Link>
+            )}
+            {github && (
+              <a className="pill outline" href={github} target="_blank" rel="noopener noreferrer">
+                Browse more projects on GitHub ↗
+              </a>
+            )}
           </div>
         )}
       </div>
