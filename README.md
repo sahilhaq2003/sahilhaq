@@ -73,9 +73,13 @@ Admin dashboard is available at `http://localhost:5173/admin/login`.
 
 ## Vercel deployment
 
-The root `vercel.json` builds the Vite frontend and routes `/api/*` to the
-serverless Express entry point. Configure these environment variables in the
-Vercel project before deploying:
+This repository uses two Vercel projects connected to the same GitHub branch:
+
+- `frontend/` uses the Vite preset. Set `VITE_API_URL` to the backend URL.
+- `backend/` uses the Express preset and exports the app from `src/app.js`.
+
+Configure these environment variables in the backend Vercel project before
+deploying:
 
 - `MONGODB_URI`
 - `CLIENT_ORIGIN` (the deployed frontend URL)
