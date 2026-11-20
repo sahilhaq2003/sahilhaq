@@ -6,7 +6,7 @@
 export const PROFILE = {
   key: "main",
   github: "https://github.com/sahilhaq2003",
-  email: "sahilhaq622@gmail.com",
+  email: "sahilhaq2003@gmail.com",
   linkedin: "https://www.linkedin.com/in/sahil-haq-106595222/",
   fiverr: "",
   instagram: "",
