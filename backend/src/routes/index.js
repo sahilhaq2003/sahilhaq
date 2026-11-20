@@ -34,7 +34,14 @@ const loginLimiter = rateLimit({
 });
 
 router.get("/health", (req, res) =>
-  res.json({ ok: true, db: mongoose.connection.readyState === 1 ? "connected" : "disconnected" })
+  res.json({
+    ok: true,
+    environment: process.env.VERCEL ? "vercel" : "node",
+    database: {
+      configured: Boolean(process.env.MONGODB_URI),
+      status: mongoose.connection.readyState === 1 ? "connected" : "disconnected",
+    },
+  })
 );
 
 // Auth

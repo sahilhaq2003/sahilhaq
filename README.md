@@ -71,6 +71,22 @@ Open http://localhost:5173. In development Vite forwards `/api/*` to `http://loc
 
 Admin dashboard is available at `http://localhost:5173/admin/login`.
 
+## Vercel deployment
+
+The root `vercel.json` builds the Vite frontend and routes `/api/*` to the
+serverless Express entry point. Configure these environment variables in the
+Vercel project before deploying:
+
+- `MONGODB_URI`
+- `CLIENT_ORIGIN` (the deployed frontend URL)
+- `JWT_SECRET`
+- `ADMIN_EMAIL`
+- `ADMIN_PASSWORD_HASH`
+
+The deployment can be checked at `/api/health`. A healthy function returns
+`ok: true`; `database.configured` reports whether `MONGODB_URI` is available to
+the deployment.
+
 ## 4. Editing content
 
 - **Quick way:** edit `backend/src/data/content.js` and run `npm run seed` again (this replaces content but keeps contact messages).
