@@ -1,0 +1,16 @@
+{
+  "name": "sahil-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Sahil Haq portfolio — React (Vite) frontend + Node.js/Express backend + MongoDB",
+  "scripts": {
+    "install:all": "npm install && npm --prefix backend install && npm --prefix frontend install",
+    "dev": "concurrently -n api,web -c yellow,cyan \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
+    "seed": "npm --prefix backend run seed",
+    "build": "npm --prefix frontend run build",
+    "start": "npm --prefix backend start"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
